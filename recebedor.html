@@ -1,33 +1,23 @@
 <!DOCTYPE html>
 <html lang="pt_BR">
-
 <head>
-	<meta charset="UTF-8">
-	<title>Recebedor de notificações</title>
+  <meta charset="UTF-8">
+  <title>Recebedor de notificações</title>
 </head>
-
 <body>
-
-
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/socket.io.js"></script>
-	<script>
-		var socket = io('https://us-central1-ttgappthetalentgospelmkmk123.cloudfunctions.net/api/api/notificar&notificacao', { transports: ['websocket', 'polling', 'flashsocket'] });
-
-		io.socket.on('connect', function onConnect() {
-			console.log('This socket is now connected to the Sails server.');
-		});
-
-		socket.on('notificacao', function (data) {
-			document.getElementById('messagebox').innerHTML = data;
-			//alert(data);
-			//console.log(data);
-
-		});
+  <script src="http://localhost:4555/socket.io/socket.io.js"></script>
+  <script>
+	  var socket = io('http://localhost:4555', {transports: ['websocket', 'polling', 'flashsocket']});
+	  socket.on('notificacao', function (data) {
+		document.getElementById('id').innerHTML = data.id;
+		document.getElementById('msg').innerHTML = data.notificacao;
+		console.log(data);
+	  });
 	</script>
-
-	<center>
-		<div id="messagebox">oi</div>
-	</center>
+  <div id="messagebox">
+	  <span id="id"></span>
+	  <span id="msg"></span>
+	  <span id="all"></span>
+  </div>
 </body>
-
 </html>
